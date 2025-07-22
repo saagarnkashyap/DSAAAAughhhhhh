@@ -1,25 +1,30 @@
-class Solution {
-    long res(long a, long b, char Operator) {
-        if (Operator == '+') return a + b;
-        else if (Operator == '-') return a - b;
-        else if (Operator == '*') return a * b;
-        return a / b;
-    }
+import java.util.*;
 
+public class Solution {
     public int evalRPN(String[] tokens) {
-        Stack<Long> stack = new Stack<>();
-        int n = tokens.length;
-        for (int i = 0; i < n; i++) {
-            if (tokens[i].length() == 1 && tokens[i].charAt(0) < 48) {
-                long integer2 = stack.pop();
-                long integer1 = stack.pop();
-                char operator = tokens[i].charAt(0);
-                long res = res(integer1, integer2, operator);
-                stack.push(res);
-            } else {
-                stack.push(Long.parseLong(tokens[i]));
-            }
-        }
-        return stack.pop().intValue();
-    }
+        int a,b;
+		Stack<Integer> S = new Stack<Integer>();
+		for (String s : tokens) {
+			if(s.equals("+")) {
+				S.add(S.pop()+S.pop());
+			}
+			else if(s.equals("/")) {
+				b = S.pop();
+				a = S.pop();
+				S.add(a / b);
+			}
+			else if(s.equals("*")) {
+				S.add(S.pop() * S.pop());
+			}
+			else if(s.equals("-")) {
+				b = S.pop();
+				a = S.pop();
+				S.add(a - b);
+			}
+			else {
+				S.add(Integer.parseInt(s));
+			}
+		}	
+		return S.pop();
+	}
 }
