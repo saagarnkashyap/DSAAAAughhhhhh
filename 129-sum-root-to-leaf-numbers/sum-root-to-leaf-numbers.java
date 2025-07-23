@@ -1,23 +1,20 @@
 class Solution {
     public int sumNumbers(TreeNode root) {
-        return helper(root,"");
+        return dfs(root, 0);
     }
 
-    public int helper(TreeNode root,String s)
-    {
-        if(root== null)
-        {
-            return 0;
+    // DFS traversal with accumulated number
+    private int dfs(TreeNode node, int currentSum) {
+        if (node == null) return 0;
+
+        currentSum = currentSum * 10 + node.val;
+
+        // If it's a leaf node, return the formed number
+        if (node.left == null && node.right == null) {
+            return currentSum;
         }
-        if(root.left==null && root.right==null)
-        {
-            return Integer.parseInt(s+root.val);
-        }
 
-        int left=helper(root.left,s+root.val);
-        int right=helper(root.right,s+root.val);
-
-        return left+right;
-
+        // Recurse on both subtrees
+        return dfs(node.left, currentSum) + dfs(node.right, currentSum);
     }
 }
