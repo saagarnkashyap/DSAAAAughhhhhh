@@ -11,7 +11,7 @@ jobs:
     env:
       LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
       LEETCODE_COOKIE: ${{ secrets.LEETCODE_COOKIE }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
