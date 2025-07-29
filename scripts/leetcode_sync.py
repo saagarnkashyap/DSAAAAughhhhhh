@@ -5,7 +5,7 @@ import os
 
 LEETCODE_USERNAME = os.getenv("LEETCODE_USERNAME")
 LEETCODE_COOKIE = os.getenv("LEETCODE_COOKIE")
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GH_TOKEN = os.getenv("GH_TOKEN")
 REPO_NAME = os.getenv("GITHUB_REPOSITORY")
 BRANCH = "main"
 FOLDER = "submissions"
@@ -34,7 +34,7 @@ def get_accepted_submissions():
     return all_subs
 
 def push_to_github(filename, content):
-    g = Github(GITHUB_TOKEN)
+    g = Github(GH_TOKEN)
     repo = g.get_repo(REPO_NAME)
     path = f"{FOLDER}/{filename}"
     try:
