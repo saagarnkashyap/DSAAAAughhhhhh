@@ -1,0 +1,29 @@
+name: LeetCode Auto Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'  # Every day at 6 AM UTC
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
+      LEETCODE_COOKIE: ${{ secrets.LEETCODE_COOKIE }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests PyGithub
+
+      - name: Run sync script
+        run: python scripts/leetcode_sync.py
+
