@@ -1,0 +1,6 @@
+import pandas as pd
+
+def getDataframeSize(players):
+    # Calculate the number of rows and columns
+    rows, columns = players.shape
+    return [rows, columns]
