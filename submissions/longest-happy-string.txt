@@ -1,0 +1,49 @@
+class Solution:
+    def longestDiverseString(self, a, b, c):
+        # Initialize a result list to construct the string
+        result = []
+        
+        # Create a list to keep track of the counts and corresponding characters
+        counts = [('a', a), ('b', b), ('c', c)]
+        
+        while True:
+            # Sort counts based on the number of characters left (descending order)
+            counts.sort(key=lambda x: -x[1])
+            
+            # Check if the highest count is zero, which means we can stop
+            if counts[0][1] == 0:
+                break
+            
+            # Select the character with the maximum remaining count
+            char_to_add = counts[0][0]
+            
+            # Check if we can add this character without violating the condition
+            if len(result) >= 2 and result[-1] == result[-2] == char_to_add:
+                # If the top character is the same as the last two in result,
+                # we must check the next highest character
+                if counts[1][1] > 0:  # If the second character has a count left
+                    char_to_add = counts[1][0]
+                else:
+                    break  # If we can't add any character, we are done
+            
+            # Append the chosen character to the result
+            result.append(char_to_add)
+            
+            # Decrement the count for the chosen character
+            if char_to_add == 'a':
+                a -= 1
+            elif char_to_add == 'b':
+                b -= 1
+            else:
+                c -= 1
+            
+            # Update counts for the next iteration
+            counts = [('a', a), ('b', b), ('c', c)]
+        
+        # Join the list into a string and return
+        return ''.join(result)
+
+# Example usage
+sol = Solution()
+print(sol.longestDiverseString(1, 1, 7))  # Output could be "ccaccbcc" or similar
+print(sol.longestDiverseString(7, 1, 0))  # Output could be "aabaa"
