@@ -1,0 +1,4 @@
+def createBonusColumn(employees):
+    # Create a new column bonus that contains the doubled values of the salary column
+    employees['bonus'] = employees['salary'] * 2
+    return employees
