@@ -1,0 +1,3 @@
+def selectData(students):
+    # Select the name and age of the student with student_id = 101
+    return students.loc[students['student_id'] == 101, ['name', 'age']]
